@@ -28,15 +28,16 @@
 
   </header>
 
-  <section id="about">
+  <section id="about" class="fadeIn">
     <h2>About Me</h2>
     <p>Hi! I'm Lewis, currently learning web development. I'm exploring HTML, CSS, JavaScript and building projects to sharpen my skills. </p>
     <p>Apart from that I am looking forward to improving as many aspects of my life as possible without compromising my mental health. </p>
   </section>
 
-  <section id="skills">
-  <h2>Skills I'm Learning</h2>
+  <section id="skills" class="fadeIn">
+  <h2> Skills I'm Learning </h2>
 
+  
   <div class="skills-container">
 
     <div class="skill-card">HTML Basics</div>
@@ -48,7 +49,7 @@
   </section>
 
 
-   <section id="goals">
+   <section id="goals" class="fadeIn">
     <h2>Goals</h2>
     <ul>
       <li>Get clean off weed and reduce alcohol/Veve to a minimum</li>
@@ -62,13 +63,21 @@
       <li>Improve my fitness</li>
     </ul>
   </section>
-  </main>
+</main>
 
   <footer>
-  <p>© 2025 Lewis Skim — Learning to Code One Day at a Time</p>
+    <p>© <span id="year"></span> Lewis Skim — Learning to Code One Day at a Time</p>
+
 </footer>
 
 </div>
+
+<button id="dark-toggle" class="dark-btn">🌙</button>
+
+<button id="backToTop" class="top-btn">⬆️</button>
+
+<script src="script.js"></script>
+
 </body>
 
 </html>

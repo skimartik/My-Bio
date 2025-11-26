@@ -21,9 +21,23 @@ section {
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   animation: fadeIn 0.8s ease both;
 }
+
+
+/*fade-in animation*/
+.fadeIn {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+}
+
+.fadeIn.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 nav {
   background: #333;
@@ -91,17 +105,19 @@ footer p {
 
 .skill-card {
   background: #e3eefe;
-  padding: 15px 20px;
-  border-radius: 8px;
+  padding: 18px 22px;
+  border-radius: 10px;
   font-weight: bold;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transform: scale(1.07);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
 }
+
+
 @media (max-width: 600px) {
   nav ul {
     flex-direction: column;
@@ -116,4 +132,76 @@ footer p {
     width: 120px;
     height: 120px;
   }
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background: #121212;
+  color: #e4e4e4;
+}
+
+body.dark-mode header {
+  background: linear-gradient(135deg, #222, #444);
+}
+
+body.dark-mode section {
+  background: #1e1e1e;
+  box-shadow: 0 3px 10px rgba(255,255,255,0.1);
+}
+
+body.dark-mode nav {
+  background: #111;
+}
+
+body.dark-mode footer {
+  background: #111;
+  color: #ccc;
+}
+
+body.dark-mode .skill-card {
+  color:#111;
+}
+
+/*dark mode toggle button*/
+
+.dark-btn {
+  
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 14px;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.dark-btn:hover {
+  transform: scale(1.1);
+}
+
+/* back to the top */
+
+.top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  /* Hidden until scroll( didplay:none;) deleted code */
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.top-btn:hover {
+  transform: scale(1.1);
 }
