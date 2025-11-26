@@ -32,23 +32,25 @@ topBtn.addEventListener("click", () => {
 // 3. FADE-IN ANIMATION ON SCROLL
 // =============================
 
-const faders = document.querySelectorAll(".fadeIn");
+const faders = document.querySelectorAll(".fade-in");
 
+const appearOptions = {
+  threshold: 0.2
+};
 
-function checkFade() {
-  const triggerBottom = window.innerHeight * 0.9;
-
-  faders.forEach(element => {
-    const boxTop = element.getBoundingClientRect().top;
-
-    if (boxTop < triggerBottom) {
-      element.classList.add("show");
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target); // fade-in only once
     }
   });
-}
+}, appearOptions);
 
-window.addEventListener("scroll", checkFade);
-checkFade();
+faders.forEach(fader => {
+  appearOnScroll.observe(fader);
+});
+
 
 
 // =====================

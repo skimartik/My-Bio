@@ -24,18 +24,18 @@ section {
 
 
 /*fade-in animation*/
-.fadeIn {
+.fade-in {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease-out, transform 0.6s ease-out;
 }
 
-.fadeIn.show {
+.fade-in.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
   0% { opacity: 0; transform: translateY(10px); }
   100% { opacity: 1; transform: translateY(0); }
 }
