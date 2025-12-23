@@ -10,56 +10,101 @@
 </head>
 <body>
 
+<!-- Loading Screen -->
+<div id="loader">
+  <div id="loader-content">LS</div>
+</div>
+
+<div id="main-content" style="opacity: 0;">
+
     <nav>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#goals">Goals</a></li>
+    <li><a href="#" id="contactBtn">Contact</a></li>
+
   </ul>
 </nav>
+
 
 <div class="container">
   <main>
 
-  <header>
+  <header class="fade-in">
     <h1>Lewis Skim Mukangu</h1>
     <p>Web Developer in Training</p>
-    <img src="Profile_pic.jpg" alt="Lewis Skim Profile Picture" class="profile">
+    <img src="Profile_pic.jpg" alt="Lewis Skim Profile Picture" class="profile fade-in">
+    <h2 class="typing-text show">
+  <span id="typed"></span><span class="cursor">|</span>
+</h2>
 
   </header>
 
-  <section id="about" class="fade-in">
+  <section id="about" class="fade-in" >
     <h2>About Me</h2>
     <p>Hi! I'm Lewis, currently learning web development. I'm exploring HTML, CSS, JavaScript and building projects to sharpen my skills. </p>
     <p>Apart from that I am looking forward to improving as many aspects of my life as possible without compromising my mental health. </p>
+
+    <a href="Lewis-CV.pdf" download class="cv-btn">
+    Download CV
+    </a>
+
   </section>
 
   <section id="skills" class="fade-in">
   <h2> Skills I'm Learning </h2>
 
   
-  <div class="skills-container" class="fade-in">
+  <div class="skills-container">
 
-    <div class="skill-card">HTML Basics</div>
-    <div class="skill-card">CSS Basics</div>
-    <div class="skill-card">VS Code</div>
-    <div class="skill-card">Git & GitHub</div>
+    <div class="skill-card ">HTML Basics</div>
+    <div class="skill-card ">CSS Basics</div>
+    <div class="skill-card ">VS Code</div>
+    <div class="skill-card ">Git & GitHub</div>
 
   </div>
+  <div class="skill-bars fade-in">
+  <div class="skill-bar">
+    <span class="label">HTML</span>
+    <div class="bar"><div class="fill" data-width="90%"></div></div>
+    <span class="percent">90%</span>
+  </div>
+
+  <div class="skill-bar">
+    <span class="label">CSS</span>
+    <div class="bar"><div class="fill" data-width="80%"></div></div>
+    <span class="percent">80%</span>
+  </div>
+
+  <div class="skill-bar">
+    <span class="label">JavaScript</span>
+    <div class="bar"><div class="fill" data-width="60%"></div></div>
+    <span class="percent">60%</span>
+  </div>
+
+  <div class="skill-bar">
+    <span class="label">Python</span>
+    <div class="bar"><div class="fill" data-width="50%"></div></div>
+    <span class="percent">50%</span>
+  </div>
+</div>
+
   </section>
 
 
    <section id="goals" class="fade-in">
     <h2>Goals</h2>
     <ul>
-      <li>Get clean off weed and reduce alcohol/Veve to a minimum</li>
-      <li>Learn coding</li>
+      <li>Get clean</li>
+      <li>Learn coding/programming</li>
       <li>Learn Chinese and Italian</li>
-      <li>Invest in farming (goats, chicken, grow fruit trees and crops.) </li>
+      <li>Invest in farming </li>
       <li>Furnish my "house" then build/renovate another</li>
-      <li>Learn as much as possible about trading</li>
+      <li>Learn to trade</li>
       <li>Start a business</li>
-      <li>Build a serious relationship</li>
+      <li>Build a website & app for it</li>
+      <li>Build relationships</li>
       <li>Improve my fitness</li>
     </ul>
   </section>
@@ -72,9 +117,39 @@
 
 </div>
 
-<button id="dark-toggle" class="dark-btn">🌙</button>
+<button id="dark-toggle" class="theme-toggle">
+  <span class="icon sun">☀️</span>
+  <span class="icon moon">🌙</span>
+  <span class="toggle-ball"></span>
+</button>
+
 
 <button id="backToTop" class="top-btn">⬆️</button>
+
+<div id="contactModal" class="modal">
+  <div class="modal-content fade-in">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Contact Me</h2>
+
+    <form id="contactForm">
+      <label>Name:</label>
+      <input type="text" name="userNname" required>
+
+      <label>Email:</label>
+      <input type="email" name="userEmail" required>
+
+      <label>Message:</label>
+      <textarea rows="4" name="userMessage" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+    <div id="successMessage" class="success-message">
+  Your message was sent successfully!
+</div>
+</div>
+</div>
+
+</div>
 
 <script src="script.js"></script>
 

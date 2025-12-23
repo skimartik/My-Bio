@@ -1,3 +1,97 @@
+
+/* LOADING SCREEN */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f0f0f; /* or your dark mode BG */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+
+#loader-content {
+  font-size: 10rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: darkblue;
+  opacity: 0;
+  text-shadow: 
+      0 0 10px #0ff,
+      0 0 20px #0ff,
+      0 0 40px #0ff,
+      0 0 80px #0ff;
+  
+  animation: fadeIn 1.2s ease forwards,
+             spin 2.5s linear infinite,
+             neonPulse 1.8s ease-in-out infinite alternate;
+}
+
+
+/* Hide loader after fade-out */
+#loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Rotation animation */
+@keyframes spin {
+  from { transform: rotate(180deg); }
+  to   { transform: rotate(720deg); }
+}
+
+/* Neon pulsing glow intensity */
+@keyframes neonPulse {
+  from {
+    text-shadow:
+      0 0 10px #0ff,
+      0 0 20px #0ff;
+  }
+  to {
+    text-shadow:
+      0 0 20px #0ff,
+      0 0 40px #0ff,
+      0 0 80px #0ff;
+  }
+}
+
+
+/* =======================
+   COLOR VARIABLES
+==========================*/
+:root {
+  --bg: #f4f4f4;
+  --text-primary: #333;
+  --card-bg: #ffffff;
+  --accent: #4a90e2;
+  --accent2: #50c9c3;
+  --label-color: #222;
+  --bar-bg: #e6e6e6;
+  
+}
+
+body.dark-mode {
+  --bg: #121212;
+  --text-primary: #e4e4e4;
+  --card-bg: #1e1e1e;
+  --accent: #4a90e29c;
+  --accent2: #444;
+  --label-color: #fff;
+  --bar-bg: #444;
+  
+}
+
+
 body {
   font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
@@ -7,11 +101,58 @@ body {
 }
 
 header {
-   background: linear-gradient(135deg, #4a90e2, #50c9c3);
+  background: linear-gradient(135deg, #4a90e2, #50c9c3);
   color: white;
   padding: 40px 20px;
   text-align: center;
+  border-radius: 8px;
 }
+
+#main-content {
+  opacity: 0;             /* start hidden */
+  transition: opacity 0.8s ease;
+}
+
+/*Typing text animation*/
+
+.typing-text {
+
+  font-size: 1.8rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.typing-text.show {
+  opacity: 1;
+}
+
+#typed {
+  opacity: 0;
+  /* optional styling for cursor effect */
+  white-space: nowrap;
+  color: var(--primary-color, #0ff);
+  transition: opacity 0.01s linear;
+  transform: translateZ(0);
+  will-change: contents;
+}
+
+.typing-text.show #typed {
+
+opacity : 1;
+
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+     50% { opacity: 0; }
+}
+
 
 section {
   padding: 20px;
@@ -22,11 +163,11 @@ section {
   animation: fadeIn 0.8s ease both;
 }
 
-
 /*fade-in animation*/
+
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(25px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
@@ -35,12 +176,12 @@ section {
   transform: translateY(0);
 }
 
-@keyframes fade-in {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+
 nav {
-  background: #333;
+  
+  
+  background: linear-gradient(135deg, #567fd5, #50c9c3);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   padding: 10px 0;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -80,8 +221,9 @@ html {
 }
 footer {
   text-align: center;
+  border-radius: 8px;
   padding: 20px;
-  background: #333;
+  background: linear-gradient(135deg, #567fd5, #50c9c3);
   color: white;
   margin-top: 40px;
   
@@ -96,27 +238,48 @@ footer p {
   margin: 0 auto;
   padding: 20px;
 }
+
+
+/* ---- SKILLS+SKILLCARDS ---- */
+
 .skills-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
   justify-content: center;
+  padding: 10px 0;
+  perspective: 900px; /* keep perspective here */
 }
 
 .skill-card {
-  background: #e3eefe;
+  background: linear-gradient(165deg, lightblue, #50c9c3);
+  color: #fff;
   padding: 18px 22px;
   border-radius: 10px;
   font-weight: bold;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.skill-card:nth-child(1) { transition-delay: 0.1s; }
-.skill-card:nth-child(2) { transition-delay: 0.3s; }
+  min-width: 100px;
+  cursor: pointer;
 
+   transform-style: preserve-3d;
+
+  opacity: 0;
+  transform: translateY(20px);
+  /*transition: opacity 0.6s ease, transform 0.6s ease,
+              box-shadow 0.25s ease, background 0.25s ease; */
+}
+
+
+.skill-card.visible {
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Hover glow only — DO NOT set transform here */
 .skill-card:hover {
-  transform: scale(1.07);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28), 0 0 18px rgba(255,255,255,0.12);
+  background: linear-gradient(135deg, #54b2ec, #6ee3a8);
+  /* no transform property here */
 }
 
 
@@ -136,6 +299,59 @@ footer p {
   }
 }
 
+/* Progress bars*/
+/* Progress bars container */
+.skill-bars {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Each row */
+.skill-bar {
+  display: grid;
+  grid-template-columns: 90px 1fr 50px;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Visible once revealed */
+.skill-bar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Outer bar */
+.bar {
+  background: var(--bar-bg);
+  height: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Fill animation */
+.fill {
+  height: 100%;
+  width: 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #54b2ec, #6ee3a8);
+  transition: width 1.3s ease;
+  
+}
+
+.skill-bar .label,
+.skill-bar .percentage {
+  color: var (--label-color);
+  font-weight: 600;
+}
+
+
 /* Dark Mode */
 body.dark-mode {
   background: #121212;
@@ -152,19 +368,78 @@ body.dark-mode section {
 }
 
 body.dark-mode nav {
-  background: #111;
+  background: linear-gradient(135deg, #222, #444);
 }
 
 body.dark-mode footer {
-  background: #111;
-  color: #ccc;
+   background: linear-gradient(135deg, #222, #444);
+   color: #ccc;
 }
 
 body.dark-mode .skill-card {
   color:#111;
 }
 
-/*dark mode toggle button*/
+/* ===============  
+   DARK MODE TOGGLE  
+================== */
+
+.theme-toggle {
+  position: relative;
+  width: 55px;
+  height: 28px;
+  background: var(--toggle-bg, #ddd);
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  transition: background 0.3s ease;
+}
+
+.theme-toggle .icon {
+
+  font-size: 14px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle .toggle-ball {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: whitesmoke;
+  border-radius: 50%;
+  transition: transform 0.35s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Light mode state */
+body:not(.dark-mode) .theme-toggle {
+  --toggle-bg: #dcdcdc;
+}
+body:not(.dark-mode) .theme-toggle .sun { opacity: 0.2; }
+body:not(.dark-mode) .theme-toggle .moon { opacity: 1  ; }
+body:not(.dark-mode) .theme-toggle .toggle-ball {
+  transform: translateX(0);
+}
+
+/* Dark mode state */
+body.dark-mode .theme-toggle {
+  --toggle-bg: #333;
+}
+body.dark-mode .theme-toggle .sun { opacity: 1; }
+body.dark-mode .theme-toggle .moon { opacity: 0.2; }
+body.dark-mode .theme-toggle .toggle-ball {
+  transform: translateX(27px);
+}
+
+/* EDITED OUT DARK BUTTON
 
 .dark-btn {
   
@@ -184,7 +459,8 @@ body.dark-mode .skill-card {
 
 .dark-btn:hover {
   transform: scale(1.1);
-}
+}  */
+
 
 /* back to the top */
 
@@ -199,7 +475,7 @@ body.dark-mode .skill-card {
   border-radius: 50%;
   cursor: pointer;
   font-size: 20px;
-  /* Hidden until scroll( didplay:none;) deleted code */
+  /* Hidden until scroll( display:none;) deleted code */
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
   transition: 0.3s;
 }
@@ -207,3 +483,128 @@ body.dark-mode .skill-card {
 .top-btn:hover {
   transform: scale(1.1);
 }
+
+/* Overlay */
+.modal {
+  color:#4a90e2;
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Popup box */
+
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  padding: 25px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
+  animation: modalZoom 0.25s ease;
+  transform-origin: center;
+  display:block;
+}
+
+@keyframes modalZoom {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Form styling */
+#contactForm input,
+#contactForm textarea {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#contactForm button {
+  width: 100%;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#contactForm button:hover {
+  opacity: 0.9;
+}
+
+/* Dark mode compatibility */
+body.dark-mode .modal-content {
+  background: #222;
+  color: #fff;
+}
+
+.success-message {
+  display: none;
+  margin-top: 15px;
+  border-radius: 8px;
+  background: #4caf50;
+
+  text-align: center;
+  width: 100%;
+  padding: 20px 10px;
+  font-size: 0.85rem;
+  color:whitesmoke;
+  justify-content:center;
+  align-items: center;
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+}
+
+.success-message.show {
+  opacity: 1;
+}
+
+.cv-btn {
+  display: inline-block !important;
+  padding: 12px 25px;
+  background: lightseagreen;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+  
+}
+
+.cv-btn:hover {
+  opacity: 0.8 ;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+
